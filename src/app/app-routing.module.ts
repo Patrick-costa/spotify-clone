@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AutenticadoGuard } from './guards/autenticado.guard';
 import { LoginComponent } from './pages/login/login.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login' ,
+    redirectTo: 'player' ,
     pathMatch: 'full',
   },
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
   {
     path: 'player',
     loadChildren: () => import('./pages/player/player.module').then(x => x.PlayerModule),
+    canLoad: [AutenticadoGuard]
   },
 ];
 
