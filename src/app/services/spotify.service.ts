@@ -66,7 +66,6 @@ export class SpotifyService {
   definirAccessToken(token: string){
     this.spotifyApi.setAccessToken(token);
     localStorage.setItem('token', token);
-    this.spotifyApi.skipToNext();
   }
 
   async buscarPlaylistUsuario(offset = 0, limit = 50): Promise<Playlist[]>{
@@ -84,6 +83,11 @@ export class SpotifyService {
     const musicas = await this.spotifyApi.getMySavedTracks({ offset, limit});
     console.log(musicas);
     return musicas.items.map(x => SpotifyTrackParaMusica(x.track));
+  }
+
+  async executarMusica(musicaId: string){
+    await this.spotifyApi.queue(musicaId);
+    this.spotifyApi.skipToNext();
   }
 
   logout(){
