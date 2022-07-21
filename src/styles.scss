@@ -16,7 +16,7 @@ html, body{
 .flex{
     display: flex;
 
-    .center{
+    &-center{
         justify-content: center;
         align-items: center;
     }
