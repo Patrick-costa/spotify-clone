@@ -1,3 +1,5 @@
+import { Artista } from "../models/artistas";
+import { Musica } from "../models/musica";
 import { Playlist } from "../models/playlist";
 import { Usuario } from "../models/usuario";
 
@@ -14,5 +16,31 @@ export function SpotifyPlaylistParaPlaylist(playlist: SpotifyApi.PlaylistObjectS
         id: playlist.id,
         nome: playlist.name,
         imagemUrl: playlist.images.pop().url
+    }
+}
+
+export function SpotifyArtistaParaArtista(spotifyArtista: SpotifyApi.ArtistObjectFull): Artista{
+    return {
+        id: spotifyArtista.id,
+        imagemUrl: spotifyArtista.images.sort((a,b) => a.width - b.width).pop().url,
+        nome: spotifyArtista.name
+    }
+}
+
+export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull): Musica{
+    return {
+        id: spotifyTrack.id,
+        titulo: spotifyTrack.name,
+        album: {
+            id: spotifyTrack.id,
+            imagemUrl: spotifyTrack.album.images.shift().url,
+            nome: spotifyTrack.album.name,
+        },
+        artistas: spotifyTrack.artists.map(artista => ({
+            id: artista.id,
+            nome: artista.name,
+        })),
+        tempo: '',
+
     }
 }

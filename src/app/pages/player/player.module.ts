@@ -7,6 +7,9 @@ import { PainelEsquerdoComponent } from "../components/painel-esquerdo/PainelEsq
 import { BotaoMenuComponent } from '../components/botao-menu/botao-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RodapeComponent } from '../components/rodape/rodape.component';
+import { HomeComponent } from '../home/home.component';
+import { TopArtistaComponent } from '../components/top-artista/top-artista.component';
+import { PainelDireitoComponent } from '../components/painel-direito/painel-direito.component';
 
 
 @NgModule({
@@ -14,7 +17,10 @@ import { RodapeComponent } from '../components/rodape/rodape.component';
     PlayerComponent,
     PainelEsquerdoComponent,
     BotaoMenuComponent,
-    RodapeComponent
+    RodapeComponent,
+    HomeComponent,
+    TopArtistaComponent,
+    PainelDireitoComponent
   ],
   imports: [
     CommonModule,
