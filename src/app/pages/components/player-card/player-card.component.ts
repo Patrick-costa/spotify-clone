@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { faStepBackward, faStepForward } from '@fortawesome/free-solid-svg-icons';
+import { faPause, faPlay, faStepBackward, faStepForward } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { newMusica } from 'src/app/Common/factories';
 import { Musica } from 'src/app/models/musica';
 import { PlayerService } from 'src/app/services/player-service.service';
+import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
   selector: 'app-player-card',
@@ -17,8 +18,14 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
 
   anteriorIcone = faStepBackward;
   proximoIcone = faStepForward;
+  pauseIcone = faPause;
+  playIcone = faPlay;
 
-  constructor(private playerService: PlayerService) { }
+  pausado: boolean = false;
+  play: boolean = true;
+
+  constructor(private playerService: PlayerService,
+              private spotifyService: SpotifyService) { }
 
   ngOnInit(): void {
     this.obterMusicaTocando();
@@ -37,4 +44,19 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
     this.subs.push(sub);
   }
 
+  async voltarMusica(){
+    await this.spotifyService.voltarMusica();
+  }
+
+  async proximaMusica(){
+    await this.spotifyService.proximaMusica();
+  }
+
+  async pausarMusica(){
+    await this.spotifyService.pausarMusica();
+  }
+
+  async playMusica(){
+    await this.spotifyService.playMusica();
+  }
 }

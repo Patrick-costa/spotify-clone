@@ -19,6 +19,7 @@ export function newMusica(): Musica{
         },
         artistas: [],
         tempo: '',
-        titulo: ''
+        titulo: '',
+        tocando: true,
     }
 }

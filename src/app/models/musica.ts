@@ -11,5 +11,5 @@ export interface Musica{
         imagemUrl: string,
     },
     tempo: string,
-    
+    tocando: boolean;
 }

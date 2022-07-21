@@ -30,4 +30,5 @@ export class PlayerService{
   definirMusicaAtual(musica: Musica){
     this.musicaAtual.next(musica);
   }
+
 }

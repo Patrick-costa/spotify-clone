@@ -29,7 +29,7 @@ export function SpotifyArtistaParaArtista(spotifyArtista: SpotifyApi.ArtistObjec
     }
 }
 
-export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull): Musica{
+export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull, status: boolean): Musica{
     
     if(!spotifyTrack){
         return newMusica();
@@ -53,6 +53,6 @@ export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull)
             nome: artista.name,
         })),
         tempo: msParaMinutos(spotifyTrack.duration_ms),
-
+        tocando: status,
     }
 }
