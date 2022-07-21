@@ -90,6 +90,11 @@ export class SpotifyService {
     this.spotifyApi.skipToNext();
   }
 
+  async obterMusicaAtual(): Promise<Musica>{
+    const musicaSpotify = await this.spotifyApi.getMyCurrentPlayingTrack();
+    return SpotifyTrackParaMusica(musicaSpotify.item);
+  }
+
   logout(){
     localStorage.clear;
     this.router.navigate(['/login'])

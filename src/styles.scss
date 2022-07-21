@@ -39,6 +39,9 @@ html, body{
 }
 
 .mt{
+    &-1{
+        margin-top: 1vh;
+    }
     &-2{
         margin-top: 2vh;
     }
@@ -47,6 +50,9 @@ html, body{
     }
     &-4{
         margin-top: 4vh;
+    }
+    &-5{
+        margin-top: 5vh;
     }
 }
 

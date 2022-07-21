@@ -1,0 +1,25 @@
+.container{
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 0px;
+
+    &:hover{
+        background-color: #fff;
+    }
+    img{
+        width: 40px;
+        border-radius: 50%;
+        height: 40px;
+    }
+
+    span{
+        color: #00000070;
+        flex-grow: 1;
+        margin-left: 10px;
+        font-size: .85rem;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

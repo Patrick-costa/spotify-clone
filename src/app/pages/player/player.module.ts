@@ -10,6 +10,11 @@ import { RodapeComponent } from '../components/rodape/rodape.component';
 import { HomeComponent } from '../home/home.component';
 import { TopArtistaComponent } from '../components/top-artista/top-artista.component';
 import { PainelDireitoComponent } from '../components/painel-direito/painel-direito.component';
+import { BuscasRecentesComponent } from '../components/buscas-recentes/buscas-recentes.component';
+import { FormsModule } from '@angular/forms';
+import { TopArtistasComponent } from '../components/top-artistas/top-artistas.component';
+import { ArtistaItemImagemComponent } from '../components/artista-item-imagem/artista-item-imagem.component';
+import { PlayerCardComponent } from '../components/player-card/player-card.component';
 
 
 @NgModule({
@@ -20,11 +25,16 @@ import { PainelDireitoComponent } from '../components/painel-direito/painel-dire
     RodapeComponent,
     HomeComponent,
     TopArtistaComponent,
-    PainelDireitoComponent
+    PainelDireitoComponent,
+    BuscasRecentesComponent,
+    TopArtistasComponent,
+    ArtistaItemImagemComponent,
+    PlayerCardComponent
   ],
   imports: [
     CommonModule,
     FontAwesomeModule,
+    FormsModule,
     RouterModule.forChild(PlayerRotas),
   ]
 })

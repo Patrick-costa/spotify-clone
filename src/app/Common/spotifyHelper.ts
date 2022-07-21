@@ -3,6 +3,7 @@ import { Artista } from "../models/artistas";
 import { Musica } from "../models/musica";
 import { Playlist } from "../models/playlist";
 import { Usuario } from "../models/usuario";
+import { newMusica } from "./factories";
 
 export function SpotifyUserParaUsuario(user: SpotifyApi.CurrentUsersProfileResponse): Usuario{
     return {
@@ -29,6 +30,10 @@ export function SpotifyArtistaParaArtista(spotifyArtista: SpotifyApi.ArtistObjec
 }
 
 export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull): Musica{
+    
+    if(!spotifyTrack){
+        return newMusica();
+    }
     
     const msParaMinutos = (ms: number) => {
         const data = addMilliseconds(new Date(0), ms);
