@@ -4,6 +4,7 @@ import Spotify from 'spotify-web-api-js';
 import { Usuario } from '../models/usuario';
 import { SpotifyPlaylistParaPlaylist, SpotifyUserParaUsuario } from '../Common/spotifyHelper';
 import { Playlist } from '../models/playlist';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,26 +14,26 @@ export class SpotifyService {
   spotifyApi: Spotify.SpotifyWebApiJs;
   usuario: Usuario;
   id: string;
-  constructor() { 
+  constructor(private router: Router) { 
     this.spotifyApi = new Spotify();
   }
 
-  async inicializarUsuario(){
-    if(!!this.usuario){
+  async inicializarUsuario() {
+    if(!!this.usuario)
       return true;
-    }
 
     const token = localStorage.getItem('token');
 
-    if(!token){
+    if(!token)
       return false;
-    }
 
-    try{
+    try {
+
       this.definirAccessToken(token);
       await this.obterSpotifyUsuario();
       return !!this.usuario;
-    } catch(e){
+
+    }catch(ex){
       return false;
     }
   }
@@ -70,5 +71,10 @@ export class SpotifyService {
     const playlists = await this.spotifyApi.getUserPlaylists(this.usuario.id, { offset, limit });
     console.log(playlists);
     return playlists.items.map(SpotifyPlaylistParaPlaylist);
+  }
+
+  logout(){
+    localStorage.clear;
+    this.router.navigate(['/login'])
   }
 }
