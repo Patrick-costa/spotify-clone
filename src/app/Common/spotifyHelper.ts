@@ -3,7 +3,7 @@ import { Artista } from "../models/artistas";
 import { Musica } from "../models/musica";
 import { Playlist } from "../models/playlist";
 import { Usuario } from "../models/usuario";
-import { newMusica } from "./factories";
+import { newMusica, newPlaylist } from "./factories";
 
 export function SpotifyUserParaUsuario(user: SpotifyApi.CurrentUsersProfileResponse): Usuario{
     return {
@@ -54,5 +54,17 @@ export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull,
         })),
         tempo: msParaMinutos(spotifyTrack.duration_ms),
         tocando: status,
+    }
+}
+
+export function SpotifySinglePlaylistParaPlaylist(playlist: SpotifyApi.SinglePlaylistResponse): Playlist{
+    if(!playlist){
+        return newPlaylist();
+    }
+    return{
+        id: playlist.id,
+        nome: playlist.name,
+        imagemUrl: playlist.images.shift().url,
+        musicas: [],
     }
 }

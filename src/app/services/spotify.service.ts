@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SpotifyConfiguration } from 'src/environments/environment';
 import Spotify from 'spotify-web-api-js';
 import { Usuario } from '../models/usuario';
-import { SpotifyArtistaParaArtista, SpotifyPlaylistParaPlaylist, SpotifyTrackParaMusica, SpotifyUserParaUsuario } from '../Common/spotifyHelper';
+import { SpotifyArtistaParaArtista, SpotifyPlaylistParaPlaylist, SpotifySinglePlaylistParaPlaylist, SpotifyTrackParaMusica, SpotifyUserParaUsuario } from '../Common/spotifyHelper';
 import { Playlist } from '../models/playlist';
 import { Router } from '@angular/router';
 import { Artista } from '../models/artistas';
@@ -70,7 +70,6 @@ export class SpotifyService {
 
   async buscarPlaylistUsuario(offset = 0, limit = 50): Promise<Playlist[]>{
     const playlists = await this.spotifyApi.getUserPlaylists(this.usuario.id, { offset, limit });
-    console.log(playlists);
     return playlists.items.map(SpotifyPlaylistParaPlaylist);
   }
 
@@ -114,6 +113,20 @@ export class SpotifyService {
 
   async playMusica(){
     await this.spotifyApi.play();
+  }
+
+  async buscarMusicasPlaylist(playlistId: string, offset = 0, limit = 50){
+    const playlistSpotify = await this.spotifyApi.getPlaylist(playlistId);
+    if(!playlistSpotify){
+      return null;
+    }
+
+    const playlist = SpotifySinglePlaylistParaPlaylist(playlistSpotify);
+    const tocando = true;
+    const musicasSpotify = await this.spotifyApi.getPlaylistTracks(playlistId, {offset, limit})
+    playlist.musicas = musicasSpotify.items.map(musica => SpotifyTrackParaMusica(musica.track as SpotifyApi.TrackObjectFull, tocando))
+    
+    return playlist;
   }
 
   logout(){
