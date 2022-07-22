@@ -54,9 +54,19 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
 
   async pausarMusica(){
     await this.spotifyService.pausarMusica();
+    if(this.musica.tocando == true){
+      this.musica.tocando = false;
+    } else {
+      this.musica.tocando = true
+    }
   }
 
   async playMusica(){
     await this.spotifyService.playMusica();
+    if(this.musica.tocando == true){
+      this.musica.tocando = false;
+    } else {
+      this.musica.tocando = true
+    }
   }
 }
