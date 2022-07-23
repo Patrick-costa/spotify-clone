@@ -72,3 +72,98 @@ html, body{
     background-color: #fff;
     border-radius: 10px;
 }
+
+::-webkit-scrollbar{
+    width: 7px;
+    &-thumb{
+        background-color: #37AB0020;
+        border-radius: 12px;
+    }
+    
+    &-track{
+        background: transparent;
+    }
+}
+
+.painel-direito{
+    height: 100vh;
+}
+
+.lista{
+    padding: 0px 50px;
+    padding-bottom: 20px;
+    width: 80%;
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+
+.table{
+    width: 100%;
+    text-align: left;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.play{
+    color: #37AB00;
+    font-size: .5rem;
+}
+
+.executando{
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0px 0px 10px #00000033;
+
+    td{
+        color: #37AB00;
+    }
+}
+
+thead th{
+    font-size: .75rem;
+    font-weight: 600;
+    color: #0000004D;
+}
+
+th, td {
+    padding-right: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:nth-child(1){
+        padding-left: 10px;
+    }
+}
+
+tr{
+    &:hover{
+        cursor: pointer;
+
+        td{
+            color: #37AB00;
+        }
+    }
+}
+
+td{
+    padding: 10px 20px 10px 0px;
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: .85rem;
+    color: #00000091;
+
+    &:nth-child(1){
+        padding-left: 10px;
+    }
+}
+
+.w{
+    @for $i from 1 to 10{
+        $width: $i * 5;
+
+        &-#{ $width }{
+            width: #{ $width * 1%};
+        }
+    }
+}

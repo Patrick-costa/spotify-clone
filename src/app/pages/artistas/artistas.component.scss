@@ -1,0 +1,22 @@
+:host{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .lista{
+        margin-bottom: 40px;
+    }
+
+    .listaArtista{
+    max-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    }
+
+    .painel-direito{
+        height: 100vh;
+    }
+
+}

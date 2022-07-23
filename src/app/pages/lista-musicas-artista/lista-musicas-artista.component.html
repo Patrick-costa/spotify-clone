@@ -1,14 +1,9 @@
-<app-painel-esquerdo [menuSelecionado]="'Home'"></app-painel-esquerdo>
-<div class="minhas-musicas">
-    <span class="titulo-bg mt-4">
-        Seu Top Artistas
-    </span>
+<app-painel-esquerdo [menuSelecionado]="'Artistas'"></app-painel-esquerdo>
 
-    <app-top-artista class="mt-2 d-block"></app-top-artista>
-
-    <span class="titulo-bg mt-4">
-        Musicas Curtidas
-    </span>
+<div class="lista">
+    <div class="titulo-bg mt-4">
+        {{ albumNome }}
+    </div>
 
     <table class="table mt-3">
         <thead>
@@ -30,12 +25,21 @@
                 <td>{{ musica.titulo }}</td>
                 <td>{{ obterArtistas(musica) }}</td>
                 <td class="direita">{{ musica.tempo }}</td>
-                <td>{{ musica.album.nome}}</td>
+                <td>{{ albumNome }}</td>
             </tr>
         </tbody>
     </table>
-</div>
 
-<div class="painel-direito">
-    <app-painel-direito></app-painel-direito>
+    <div class="titulo-bg mt-4">
+        Todos os albuns
+    </div>
+    <div class="listaArtista mt-2">
+        <app-card-artista
+        (click)="irParaAlbum(album.id)"
+        *ngFor="let album of albuns"
+        [nome]="album.nome"
+        [imagemUrl]="album.imagemUrl"
+        ></app-card-artista>
+    </div>
 </div>
+<app-painel-direito></app-painel-direito>

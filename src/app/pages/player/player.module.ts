@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PlayerComponent } from './player.component';
 import { RouterModule } from '@angular/router';
 import { PlayerRotas } from './player.routes';
-import { PainelEsquerdoComponent } from "../components/painel-esquerdo/PainelEsquerdoComponent";
+
 import { BotaoMenuComponent } from '../components/botao-menu/botao-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RodapeComponent } from '../components/rodape/rodape.component';
@@ -17,12 +17,16 @@ import { ArtistaItemImagemComponent } from '../components/artista-item-imagem/ar
 import { PlayerCardComponent } from '../components/player-card/player-card.component';
 import { ListaMusicasComponent } from '../lista-musicas/lista-musicas.component';
 import { BannerComponent } from '../components/banner/banner.component';
+import { ArtistasComponent } from '../artistas/artistas.component';
+import { CardArtistaComponent } from '../components/card-artista/card-artista.component';
+import { ListaMusicasArtistaComponent } from '../lista-musicas-artista/lista-musicas-artista.component';
+import { PainelEsquerdoComponent } from '../components/painel-esquerdo/painel-esquerdo.component';
+
 
 
 @NgModule({
   declarations: [
     PlayerComponent,
-    PainelEsquerdoComponent,
     BotaoMenuComponent,
     RodapeComponent,
     HomeComponent,
@@ -33,7 +37,12 @@ import { BannerComponent } from '../components/banner/banner.component';
     ArtistaItemImagemComponent,
     PlayerCardComponent,
     ListaMusicasComponent,
-    BannerComponent
+    BannerComponent,
+    ArtistasComponent,
+    CardArtistaComponent,
+    ListaMusicasComponent,
+    ListaMusicasArtistaComponent,
+    PainelEsquerdoComponent
   ],
   imports: [
     CommonModule,

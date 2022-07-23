@@ -22,7 +22,7 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
 
   musicas: Musica[] = []
   musicaAtual: Musica = newMusica();
-
+  idPlaylist: string;
   playIcone = faPlay;
 
   bannerImagemUrl = '';
@@ -35,6 +35,7 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.obterMusicas();
     this.obterMusicaAtual();
+    this.idPlaylist = this.activatedRoute.snapshot.params['id'];
   }
 
   ngOnDestroy(): void {
@@ -44,7 +45,6 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
   obterMusicaAtual(){
     const sub = this.playerService.musicaAtual.subscribe(musica => {
       this.musicaAtual = musica;
-      console.log('musica atual: ', this.musicaAtual);
     });
 
     this.subs.push(sub);

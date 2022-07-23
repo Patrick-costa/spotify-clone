@@ -19,10 +19,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   subs: Subscription[] = [];
 
   playIcone = faPlay;
-  
+
   constructor(private spotifyService: SpotifyService,
-              private playerService: PlayerService
-    ) { }
+    private playerService: PlayerService
+  ) { }
 
   ngOnInit(): void {
     this.obterMusicas();
@@ -33,24 +33,23 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subs.forEach(sub => sub.unsubscribe);
   }
 
-  async obterMusicas(){
+  async obterMusicas() {
     this.musicas = await this.spotifyService.buscarMusicas();
-    console.log(this.musicas);
+    this.spotifyService.obterArtistasUsuario();
   }
 
-  obterArtistas(musica: Musica){
+  obterArtistas(musica: Musica) {
     return musica.artistas.map(artistas => artistas.nome).join(', ');
   }
 
-  async executarMusica(musica: Musica){
+  async executarMusica(musica: Musica) {
     await this.spotifyService.executarMusica(musica.id);
     this.playerService.definirMusicaAtual(musica);
   }
 
-  obterMusicaAtual(){
+  obterMusicaAtual() {
     const sub = this.playerService.musicaAtual.subscribe(musica => {
       this.musicaAtual = musica;
-      console.log('musica atual: ', this.musicaAtual);
     });
 
     this.subs.push(sub);

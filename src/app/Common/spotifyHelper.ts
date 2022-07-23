@@ -1,4 +1,5 @@
 import { addMilliseconds, format } from "date-fns";
+import { Album } from "../models/albums";
 import { Artista } from "../models/artistas";
 import { Musica } from "../models/musica";
 import { Playlist } from "../models/playlist";
@@ -34,7 +35,7 @@ export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull,
     if(!spotifyTrack){
         return newMusica();
     }
-    
+
     const msParaMinutos = (ms: number) => {
         const data = addMilliseconds(new Date(0), ms);
         return format(data, 'mm:ss');
@@ -54,6 +55,33 @@ export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull,
         })),
         tempo: msParaMinutos(spotifyTrack.duration_ms),
         tocando: status,
+    }
+}
+
+export function SpotifyAlbumParaAlbum(album: SpotifyApi.AlbumObjectSimplified): Album{
+    return {
+        id: album.id,
+        imagemUrl: album.images.shift().url,
+        nome: album.name,
+    }
+}
+
+export function SpotifyMusicaAlbumParaMusicaAlbum(musica: SpotifyApi.TrackObjectSimplified, album: Album): Musica{
+
+    const msParaMinutos = (ms: number) => {
+        const data = addMilliseconds(new Date(0), ms);
+        return format(data, 'mm:ss');
+    }
+
+    return{
+        id: musica.uri,
+        artistas: musica.artists.map(artista => ({
+            id: artista.id,
+            nome: artista.name,
+        })),
+        titulo: musica.name,
+        tempo: msParaMinutos(musica.duration_ms),
+        album: album,
     }
 }
 

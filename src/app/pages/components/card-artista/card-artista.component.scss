@@ -1,0 +1,36 @@
+
+    .card-artista{
+        width: 180px;
+        min-height: 150px;
+        max-height: 220px;
+        background: #fff;
+        box-shadow: 0px 0px 15px #0000002d;
+        margin-top: 20px;
+        border-radius: 10px;
+        padding: 20px;
+        align-items: center;
+        cursor: pointer;
+        flex-direction: column;
+        color: #00000083;
+
+        &:hover{
+          background-color: #37AB00;
+          color: #fff;
+          box-shadow: 0px 0px 15px #0000002d;
+        }
+        .container-imagem{        
+            img{
+                width: 130px;
+                height: 130px;
+                border-radius: 50%;
+            }
+        }
+
+        .texto-artista{
+            margin-bottom: 1vh;
+            font-size: 0.8rem;
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }

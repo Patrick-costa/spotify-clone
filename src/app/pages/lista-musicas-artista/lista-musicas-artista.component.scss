@@ -1,0 +1,13 @@
+:host{
+    display: flex;
+    justify-content: space-between;
+
+    .listaArtista{
+        max-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        }
+
+}

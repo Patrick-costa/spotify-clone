@@ -1,0 +1,14 @@
+<app-painel-esquerdo [menuSelecionado]="'Artistas'"></app-painel-esquerdo>
+<div class="lista">
+    <div class="titulo-bg mt-2">
+        Seus artistas mais escutados
+    </div>
+    <div class="listaArtista mt-4">
+        <app-card-artista (click)="acessarArtista(artistas.id)"
+        *ngFor="let artistas of meusArtistas"
+        [nome]="artistas.nome"
+        [imagemUrl]="artistas.imagem"
+        ></app-card-artista>
+    </div>
+</div>
+<app-painel-direito></app-painel-direito>

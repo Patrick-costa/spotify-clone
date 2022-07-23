@@ -5,11 +5,11 @@ export interface Musica{
         id: string,
         nome: string,
     }[],
-    album: {
+    album?: {
         id: string,
         nome: string,
         imagemUrl: string,
     },
     tempo: string,
-    tocando: boolean;
+    tocando?: boolean;
 }
