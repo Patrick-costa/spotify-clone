@@ -1,4 +1,3 @@
-<app-painel-esquerdo [menuSelecionado]="'Home'"></app-painel-esquerdo>
 <div class="minhas-musicas">
     <span class="titulo-bg mt-4">
         Seu Top Artistas
@@ -21,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let musica of musicas" 
+            <tr class="musicas" *ngFor="let musica of musicas" 
             (click)="executarMusica(musica)"
             [class.executando]="musica.id === musicaAtual.id">
                 <td>

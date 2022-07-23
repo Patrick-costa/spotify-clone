@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faGuitar, faHome, faMusic, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Playlist } from 'src/app/models/playlist';
 import { SpotifyService } from 'src/app/services/spotify.service';
@@ -14,7 +14,8 @@ export class PainelEsquerdoComponent implements OnInit {
   playlists: Playlist[] = [];
 
   constructor(private spotifyService: SpotifyService,
-              private router: Router,) { }
+              private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   @Input()
   menuSelecionado: string;
@@ -28,7 +29,7 @@ export class PainelEsquerdoComponent implements OnInit {
     setTimeout(() => {
       this.buscarPlaylist();
     }, 200);
-    console.log(this.router);
+    console.log(this.activatedRoute.component.name);
   }
 
   botaoClick(botao: string){

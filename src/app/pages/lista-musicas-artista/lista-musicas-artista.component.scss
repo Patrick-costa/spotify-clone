@@ -3,11 +3,19 @@
     justify-content: space-between;
 
     .listaArtista{
-        max-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
         }
 
+        .executando{
+            background-color: #fff;
+            padding: 15px;
+            box-shadow: 0px 0px 10px #00000033;
+    
+            td{
+                color: #37AB00;
+            }
+        }
 }

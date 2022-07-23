@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
@@ -13,7 +13,7 @@ import { SpotifyService } from 'src/app/services/spotify.service';
   templateUrl: './lista-musicas-artista.component.html',
   styleUrls: ['./lista-musicas-artista.component.scss']
 })
-export class ListaMusicasArtistaComponent implements OnInit {
+export class ListaMusicasArtistaComponent implements OnInit, OnDestroy {
 
   constructor(
     private spotifyService: SpotifyService,
@@ -39,14 +39,18 @@ export class ListaMusicasArtistaComponent implements OnInit {
     this.idArtista = this.activatedRoute.snapshot.params['idArtista'];
     this.idAlbum = this.activatedRoute.snapshot.params['idPlaylist'];
     this.obterMusicasArtista();
+    this.obterMusicaAtual();
 
   }
 
+  ngOnDestroy(): void {
+    this.subs.forEach(sub => sub.unsubscribe());
+  }
+  
   obterMusicaAtual() {
     const sub = this.playerService.musicaAtual.subscribe(musica => {
       this.musicaAtual = musica;
     });
-
     this.subs.push(sub);
   }
 

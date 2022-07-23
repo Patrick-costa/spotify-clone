@@ -2,7 +2,7 @@
     .card-artista{
         width: 180px;
         min-height: 150px;
-        max-height: 220px;
+        max-height: 240px;
         background: #fff;
         box-shadow: 0px 0px 15px #0000002d;
         margin-top: 20px;
@@ -30,7 +30,6 @@
             margin-bottom: 1vh;
             font-size: 0.8rem;
             font-weight: bold;
-            overflow: hidden;
             text-overflow: ellipsis;
         }
     }
