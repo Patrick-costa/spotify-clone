@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PlayerComponent } from './player.component';
 import { RouterModule } from '@angular/router';
 import { PlayerRotas } from './player.routes';
-
 import { BotaoMenuComponent } from '../components/botao-menu/botao-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RodapeComponent } from '../components/rodape/rodape.component';
@@ -21,8 +20,10 @@ import { ArtistasComponent } from '../artistas/artistas.component';
 import { CardArtistaComponent } from '../components/card-artista/card-artista.component';
 import { ListaMusicasArtistaComponent } from '../lista-musicas-artista/lista-musicas-artista.component';
 import { PainelEsquerdoComponent } from '../components/painel-esquerdo/painel-esquerdo.component';
-
-
+import { HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorProvider } from 'src/app/interceptors/auth.interceptor';
+import { MaterialDesignModule } from '../../share/material-design/material-design.module';
+import { FormularioNovaPlaylistComponent } from '../components/formulario-nova-playlist/formulario-nova-playlist.component';
 
 @NgModule({
   declarations: [
@@ -42,13 +43,17 @@ import { PainelEsquerdoComponent } from '../components/painel-esquerdo/painel-es
     CardArtistaComponent,
     ListaMusicasComponent,
     ListaMusicasArtistaComponent,
-    PainelEsquerdoComponent
+    PainelEsquerdoComponent,
+    FormularioNovaPlaylistComponent
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
+    MaterialDesignModule,
     FontAwesomeModule,
     FormsModule,
     RouterModule.forChild(PlayerRotas),
-  ]
+  ],
+  providers: [AuthInterceptorProvider],
 })
 export class PlayerModule { }

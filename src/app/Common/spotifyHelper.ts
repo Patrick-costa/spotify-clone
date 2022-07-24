@@ -15,10 +15,15 @@ export function SpotifyUserParaUsuario(user: SpotifyApi.CurrentUsersProfileRespo
 }
 
 export function SpotifyPlaylistParaPlaylist(playlist: SpotifyApi.PlaylistObjectSimplified): Playlist{
+    let image = '';
+    if(playlist.images.length != 0){
+        image = playlist.images.shift().url;
+    }
+
     return {
         id: playlist.id,
         nome: playlist.name,
-        imagemUrl: playlist.images.pop().url
+        imagemUrl: image,
     }
 }
 
@@ -86,13 +91,18 @@ export function SpotifyMusicaAlbumParaMusicaAlbum(musica: SpotifyApi.TrackObject
 }
 
 export function SpotifySinglePlaylistParaPlaylist(playlist: SpotifyApi.SinglePlaylistResponse): Playlist{
+    let image = '';
+    if(playlist.images.length != 0){
+        image = playlist.images.shift().url;
+    }
+
     if(!playlist){
         return newPlaylist();
     }
     return{
         id: playlist.id,
         nome: playlist.name,
-        imagemUrl: playlist.images.shift().url,
+        imagemUrl: image,
         musicas: [],
     }
 }

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Artista } from '../models/artistas';
 import { Musica } from '../models/musica';
 import { Album } from '../models/albums';
+import { NovaPlaylist } from '../models/novaPlaylist';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,8 @@ export class SpotifyService {
   async obterSpotifyUsuario() {
     const userInfo = await this.spotifyApi.getMe();
     this.usuario = SpotifyUserParaUsuario(userInfo);
+    localStorage.setItem('id', this.usuario.id);
+    console.log(this.usuario);
   }
 
   obterUrlLogin() {
@@ -134,6 +137,10 @@ export class SpotifyService {
     await this.spotifyApi.play();
   }
 
+  criarPlaylist(novaPlaylist:any = {}){
+    this.spotifyApi.createPlaylist(novaPlaylist);
+  }
+
   async buscarMusicasPlaylist(playlistId: string, offset = 0, limit = 50) {
     const playlistSpotify = await this.spotifyApi.getPlaylist(playlistId);
     if (!playlistSpotify) {
@@ -144,7 +151,7 @@ export class SpotifyService {
     const tocando = true;
     const musicasSpotify = await this.spotifyApi.getPlaylistTracks(playlistId, { offset, limit })
     playlist.musicas = musicasSpotify.items.map(musica => SpotifyTrackParaMusica(musica.track as SpotifyApi.TrackObjectFull, tocando))
-
+    console.log(playlist);
     return playlist;
   }
 

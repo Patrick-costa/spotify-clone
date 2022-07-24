@@ -1,0 +1,54 @@
+:host{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+
+    input, textarea{
+        width: 100%;
+        padding: 10px 5px;
+        border-radius: 8px;
+        border: 1px solid;
+        border-color: #0000004d;
+        outline: none;
+        color: #37AB00;
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+        
+        &::placeholder{
+            color: #0000004d;
+            font-size: .85rem;
+        }
+
+        &:focus, &:active{
+            border-color: #37AB00;
+            border-width: 2px;
+        }
+    }
+
+    .input-radio{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    button{
+        width: 100%;
+        border: 0;
+        padding: 10px 0px 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: 600;
+        height: 40px;
+        font-size: .8rem;
+        text-align: center;
+        background: #37AB00;
+        color: #fff;
+        flex-grow: 0;
+        cursor: pointer;
+    }
+}

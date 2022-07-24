@@ -33,6 +33,7 @@ export class ArtistasComponent implements OnInit {
     this.idAlbum = albuns[0].id;
   }
 
+
   acessarArtista(id: string){
     this.obterAlbunsArtista(id);
     setTimeout(() => {   

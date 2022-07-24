@@ -1,8 +1,10 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { newMusica } from 'src/app/Common/factories';
 import { Musica } from 'src/app/models/musica';
+import { NovaPlaylist } from 'src/app/models/novaPlaylist';
 import { PlayerService } from 'src/app/services/player-service.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
@@ -15,18 +17,21 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   musicas: Musica[] = [];
   musicaAtual: Musica = newMusica();
+  novaPlaylist: NovaPlaylist;
 
   subs: Subscription[] = [];
-
+  token = localStorage.getItem('token');
   playIcone = faPlay;
 
   constructor(private spotifyService: SpotifyService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
     this.obterMusicas();
     this.obterMusicaAtual();
+
   }
 
   ngOnDestroy(): void {

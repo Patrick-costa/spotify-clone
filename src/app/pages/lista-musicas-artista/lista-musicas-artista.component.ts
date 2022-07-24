@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faBackward, faBackwardFast, faBackwardStep, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { newMusica } from 'src/app/Common/factories';
 import { Album } from 'src/app/models/albums';
@@ -32,15 +32,16 @@ export class ListaMusicasArtistaComponent implements OnInit, OnDestroy {
 
   albumNome: string;
   nomeArtista: string;
+
   //Icones
   playIcone = faPlay;
+  voltarIcone = faAngleLeft;
 
   ngOnInit(): void {
     this.idArtista = this.activatedRoute.snapshot.params['idArtista'];
     this.idAlbum = this.activatedRoute.snapshot.params['idPlaylist'];
     this.obterMusicasArtista();
     this.obterMusicaAtual();
-
   }
 
   ngOnDestroy(): void {
@@ -88,4 +89,7 @@ export class ListaMusicasArtistaComponent implements OnInit, OnDestroy {
     window.location.reload();
   }
 
+  voltar(){
+    this.router.navigateByUrl('/player/artistas')
+  }
 }

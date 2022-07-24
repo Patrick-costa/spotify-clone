@@ -1,95 +1,103 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto+Slab:wght@900&display=swap');
-@import 'variaveis.scss';
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto+Slab:wght@900&display=swap");
+@import "variaveis.scss";
 
-html, body{
+html,
+body {
     margin: 0;
     padding: 0;
     background-color: $corFundo;
 }
 
-*{
-    font-family: 'Montserrat', sans-serif;
+* {
+    font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
 }
 
-.flex{
+.flex {
     display: flex;
 
-    &-center{
+    &-center {
         justify-content: center;
         align-items: center;
     }
 }
 
-.titulo{
+.titulo {
     color: $cor-primaria;
     display: block;
     font-weight: bold;
+    display: flex;
+    align-items: center;
 
-    &-bg{
+    .icone-voltar {
+        margin-right: 2rem;
+        cursor: pointer;
+    }
+    
+    &-bg {
         @extend .titulo;
-        font-size: 2.2rem
+        font-size: 2.2rem;
     }
 
-    &-md{
+    &-md {
         @extend .titulo;
         font-size: 1.4rem;
     }
 }
 
-.mt{
-    &-1{
+.mt {
+    &-1 {
         margin-top: 1vh;
     }
-    &-2{
+    &-2 {
         margin-top: 2vh;
     }
-    &-3{
+    &-3 {
         margin-top: 3vh;
     }
-    &-4{
+    &-4 {
         margin-top: 4vh;
     }
-    &-5{
+    &-5 {
         margin-top: 5vh;
     }
-    &-7{
+    &-7 {
         margin-top: 7vh;
     }
 }
 
-.p-20{
+.p-20 {
     padding: 20px;
 }
 
-.p-10{
+.p-10 {
     padding: 10px;
 }
 
-.card{
+.card {
     box-shadow: 0px 0px 15px #00000008;
     background-color: #fff;
     border-radius: 10px;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 7px;
-    &-thumb{
-        background-color: #37AB0020;
+    &-thumb {
+        background-color: #37ab0020;
         border-radius: 12px;
     }
-    
-    &-track{
+
+    &-track {
         background: transparent;
     }
 }
 
-.painel-direito{
+.painel-direito {
     height: 100vh;
 }
 
-.lista{
+.lista {
     padding: 0px 50px;
     padding-bottom: 20px;
     width: 80%;
@@ -97,73 +105,77 @@ html, body{
     overflow-y: scroll;
 }
 
-.table{
+.table {
     width: 100%;
     text-align: left;
     table-layout: fixed;
     border-collapse: collapse;
 }
 
-.play{
-    color: #37AB00;
-    font-size: .5rem;
+.play {
+    color: #37ab00;
+    font-size: 0.5rem;
 }
 
-.executando{
+.executando {
     background-color: #fff;
     padding: 15px;
     box-shadow: 0px 0px 10px #00000033;
 
-    td{
-        color: #37AB00;
+    td {
+        color: #37ab00;
     }
 }
 
-thead th{
-    font-size: .75rem;
+thead th {
+    font-size: 0.75rem;
     font-weight: 600;
-    color: #0000004D;
+    color: #0000004d;
 }
 
-th, td {
+th,
+td {
     padding-right: 20px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
-    &:nth-child(1){
+    &:nth-child(1) {
         padding-left: 10px;
     }
 }
 
-tr{
-    &:hover{
+tr {
+    &:hover {
         cursor: pointer;
 
-        td{
-            color: #37AB00;
+        td {
+            color: #37ab00;
         }
     }
 }
 
-td{
+td {
     padding: 10px 20px 10px 0px;
     margin-top: 10px;
     font-weight: 500;
-    font-size: .85rem;
+    font-size: 0.85rem;
     color: #00000091;
 
-    &:nth-child(1){
+    &:nth-child(1) {
         padding-left: 10px;
     }
 }
 
-.w{
-    @for $i from 1 to 10{
+.w {
+    @for $i from 1 to 10 {
         $width: $i * 5;
 
-        &-#{ $width }{
-            width: #{ $width * 1%};
+        &-#{ $width } {
+            width: #{$width * 1%};
         }
     }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

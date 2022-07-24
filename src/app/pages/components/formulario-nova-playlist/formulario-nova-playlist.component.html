@@ -1,0 +1,10 @@
+
+<div class="titulo-bg mt-1">
+    Criar Playlist
+</div>
+<input type="text" class="mt-4" [(ngModel)]="nome" placeholder="Digite o nome da playlist">
+<textarea [(ngModel)]="descricao" placeholder="Digite uma breve descrição sobre a playlist"></textarea>
+
+<button class='mt-2' (click)="criarPlaylist()">
+    Cadastrar
+</button>
