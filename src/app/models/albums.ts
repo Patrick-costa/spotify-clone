@@ -3,4 +3,8 @@ export interface Album{
     imagemUrl: string,
     nome: string,
     data?: string,
+    artista?: {
+        id: string,
+        nome: string
+    }
 }

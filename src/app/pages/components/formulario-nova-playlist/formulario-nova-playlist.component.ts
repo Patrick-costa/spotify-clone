@@ -57,7 +57,7 @@ export class FormularioNovaPlaylistComponent implements OnInit {
     }).then((result) => {
 
       if (result.isConfirmed) {
-        window.location.reload();
+       
       }
     })
   }

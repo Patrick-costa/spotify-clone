@@ -9,6 +9,7 @@ import { Artista } from '../models/artistas';
 import { Musica } from '../models/musica';
 import { Album } from '../models/albums';
 import { NovaPlaylist } from '../models/novaPlaylist';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,10 @@ export class SpotifyService {
   spotifyApi: Spotify.SpotifyWebApiJs;
   usuario: Usuario;
   id: string;
-  constructor(private router: Router) {
+  album: Album;
+
+  constructor(private router: Router,
+              private http: HttpClient) {
     this.spotifyApi = new Spotify();
   }
 
@@ -32,13 +36,12 @@ export class SpotifyService {
       return false;
 
     try {
-
       this.definirAccessToken(token);
       await this.obterSpotifyUsuario();
       return !!this.usuario;
 
     } catch (ex) {
-      return false;
+      return false
     }
   }
 
@@ -46,7 +49,6 @@ export class SpotifyService {
     const userInfo = await this.spotifyApi.getMe();
     this.usuario = SpotifyUserParaUsuario(userInfo);
     localStorage.setItem('id', this.usuario.id);
-    console.log(this.usuario);
   }
 
   obterUrlLogin() {
@@ -99,7 +101,8 @@ export class SpotifyService {
   }
 
   async obterAlbunsArtista(artistaId: string): Promise<Album[]> {
-    const musicasArtista = await this.spotifyApi.getArtistAlbums(artistaId);
+    const limit = 48;
+    const musicasArtista = await this.spotifyApi.getArtistAlbums(artistaId, {limit});
     return musicasArtista.items.map(SpotifyAlbumParaAlbum);
   }
 
@@ -141,6 +144,17 @@ export class SpotifyService {
     this.spotifyApi.createPlaylist(novaPlaylist);
   }
 
+  async obterAlbumPeloId(albumId: string): Promise<Album>{
+    const album = await this.spotifyApi.getAlbum(albumId);
+    this.album = {
+      id: album.id,
+      imagemUrl: album.images.shift().url,
+      nome: album.name,
+  
+    }
+    return this.album;
+  }
+
   async buscarMusicasPlaylist(playlistId: string, offset = 0, limit = 50) {
     const playlistSpotify = await this.spotifyApi.getPlaylist(playlistId);
     if (!playlistSpotify) {
@@ -154,6 +168,28 @@ export class SpotifyService {
     console.log(playlist);
     return playlist;
   }
+
+  // buscarMusicasPesquisa(item: string, tipo = 'track'){
+  //   return this.http.get(`https://api.spotify.com/v1/search?q=${item}&type=${tipo}&include_external=audio`);
+  // }
+
+  buscarMusicasPesquisa(item: string, tipo = 'track,album'){
+    this.spotifyApi.search
+    return this.http.get(`https://api.spotify.com/v1/search?q=${item}&type=${tipo}&include_external=audio&limit=5`);
+  }
+
+  buscarAlbunsPesquisa(item: string, tipo = 'album'){
+    return this.http.get(`https://api.spotify.com/v1/search?q=${item}&type=${tipo}&include_external=audio&limit=6`);
+  }
+
+  buscarArtistasPesquisa(item: string, tipo = 'artist'){
+    return this.http.get(`https://api.spotify.com/v1/search?q=${item}&type=${tipo}&include_external=audio&limit=6`);
+  }
+
+  buscarPlaylistPesquisa(item: string, tipo = 'playlist'){
+    return this.http.get(`https://api.spotify.com/v1/search?q=${item}&type=${tipo}&include_external=audio&limit=6`);
+  }
+  
 
   logout() {
     localStorage.clear;

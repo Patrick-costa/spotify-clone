@@ -8,8 +8,9 @@ export interface Musica{
     album?: {
         id: string,
         nome: string,
-        imagemUrl: string,
+        imagemUrl?: string,
     },
+    reproducoes?: string,
     tempo: string,
     tocando?: boolean;
 }

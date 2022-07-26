@@ -5,10 +5,11 @@
     .image{
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
-        height: 65%;
+        height: 239px;
         background-position: top;
-        background-size: cover;
-        opacity: .85;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        opacity: 0.85;
     }
 
     .controles{

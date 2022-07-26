@@ -28,10 +28,43 @@ export function SpotifyPlaylistParaPlaylist(playlist: SpotifyApi.PlaylistObjectS
 }
 
 export function SpotifyArtistaParaArtista(spotifyArtista: SpotifyApi.ArtistObjectFull): Artista{
+
+    let image = '';
+
+    if(spotifyArtista.images.length != 0){
+        image = spotifyArtista.images.shift().url;
+    }
+
     return {
         id: spotifyArtista.id,
-        imagemUrl: spotifyArtista.images.sort((a,b) => a.width - b.width).pop().url,
+        imagemUrl: image,
         nome: spotifyArtista.name
+    }
+}
+
+export function SpotifyTrackPesquisaParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull): Musica{
+    if(!spotifyTrack){
+        return newMusica();
+    }
+
+    const msParaMinutos = (ms: number) => {
+        const data = addMilliseconds(new Date(0), ms);
+        return format(data, 'mm:ss');
+    }
+
+    return {
+        id: spotifyTrack.uri,
+        titulo: spotifyTrack.name,
+        album: {
+            id: spotifyTrack.id,
+            imagemUrl: spotifyTrack.album.images.shift().url,
+            nome: spotifyTrack.album.name,
+        },
+        artistas: spotifyTrack.artists.map(artista => ({
+            id: artista.id,
+            nome: artista.name,
+        })),
+        tempo: msParaMinutos(spotifyTrack.duration_ms),
     }
 }
 
@@ -64,12 +97,14 @@ export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull,
 }
 
 export function SpotifyAlbumParaAlbum(album: SpotifyApi.AlbumObjectSimplified): Album{
+    let albumFull: SpotifyApi.AlbumObjectFull;
     return {
         id: album.id,
         imagemUrl: album.images.shift().url,
         nome: album.name,
     }
 }
+
 
 export function SpotifyMusicaAlbumParaMusicaAlbum(musica: SpotifyApi.TrackObjectSimplified, album: Album): Musica{
 
@@ -86,7 +121,7 @@ export function SpotifyMusicaAlbumParaMusicaAlbum(musica: SpotifyApi.TrackObject
         })),
         titulo: musica.name,
         tempo: msParaMinutos(musica.duration_ms),
-        album: album,
+        album: album
     }
 }
 

@@ -24,14 +24,17 @@ export class AutenticadoGuard implements CanLoad {
 
     return new Promise(async (res) => {
       const usuarioCriado = await this.spotifyService.inicializarUsuario();
-      if (usuarioCriado)
+      if (usuarioCriado){
+        console.log('entrando aqui');
         res(true);
+      }
       else
         res(this.naoAutenticado());
     })
   }
 
   naoAutenticado() {
+    console.log('não autenticado')
     localStorage.clear();
     this.router.navigate(['/login']);
     return false;

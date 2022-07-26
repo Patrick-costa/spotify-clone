@@ -24,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorProvider } from 'src/app/interceptors/auth.interceptor';
 import { MaterialDesignModule } from '../../share/material-design/material-design.module';
 import { FormularioNovaPlaylistComponent } from '../components/formulario-nova-playlist/formulario-nova-playlist.component';
+import { PesquisarComponent } from '../pesquisar/pesquisar.component';
+import { ListaMusicasAlbumComponent } from '../lista-musicas-album/lista-musicas-album.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { FormularioNovaPlaylistComponent } from '../components/formulario-nova-p
     ListaMusicasComponent,
     ListaMusicasArtistaComponent,
     PainelEsquerdoComponent,
-    FormularioNovaPlaylistComponent
+    FormularioNovaPlaylistComponent,
+    PesquisarComponent,
+    ListaMusicasAlbumComponent
   ],
   imports: [
     CommonModule,

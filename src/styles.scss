@@ -62,6 +62,9 @@ body {
     &-5 {
         margin-top: 5vh;
     }
+    &-6 {
+        margin-top: 6vh;
+    }
     &-7 {
         margin-top: 7vh;
     }
@@ -75,9 +78,12 @@ body {
     padding: 10px;
 }
 
+.mb-1{
+    margin-bottom: 1vh;
+}
+
 .card {
     box-shadow: 0px 0px 15px #00000008;
-    background-color: #fff;
     border-radius: 10px;
 }
 

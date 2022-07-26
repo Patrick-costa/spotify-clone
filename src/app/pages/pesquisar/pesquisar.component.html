@@ -1,0 +1,76 @@
+<div class="lista">
+    <input type="text" placeholder="Artistas ou Musica" (input)="buscar($event)" [(ngModel)]="campoPesquisa"
+        class="mt-4">
+
+    <div *ngIf="campoPesquisa.length > 0">
+        <div class="titulos mt-4">
+            <div class="titulo-1">
+                <span>Melhor resultado</span>
+            </div>
+            <div class="titulo-2">
+                <span>Melhor Musica</span>
+            </div>
+        </div>
+
+        <div class="container-resultado mt-2 flex">
+            <div class="melhor-resultado" (click)="executarMusica(melhorResultado)">
+                <div class="imagem">
+                    <img [src]="melhorResultado.album.imagemUrl">
+                </div>
+                <div class="titulo-melhor-resultado mt-2">
+                    <span>{{melhorResultado.titulo}}</span>
+                </div>
+                <div class="artistas mt-2">
+                    {{ definirArtistas(melhorResultado)}}
+                </div>
+            </div>
+
+            <div class="musicas">
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let musica of musicas" 
+                        (click)="executarMusica(musica)">
+                            <td style="width: 50px;"><img class="imagem-musicas" [src]="musica.album.imagemUrl"></td>
+                            <td class="w-60"><span class='titulo'>{{ musica.titulo }}</span>{{definirArtistas(musica)}}</td>
+                            <td class="direita w-10">{{ musica.tempo }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="titulo-md mt-6">
+            Artista
+        </div>
+
+        <div class="listaArtista mt-1">
+            <app-card-artista (click)="acessarArtista(artista.id)"
+            *ngFor="let artista of artistas"
+            [nome]="artista.nome"
+            [imagemUrl]="artista.imagemUrl"
+
+            ></app-card-artista>
+        </div>
+
+        <div class="titulo-md mt-6">
+            Álbuns
+        </div>
+
+        <div class="listaArtista">
+            <app-card-artista (click)="irParaAlbum(albuns.id)"
+            *ngFor="let albuns of album"
+            [nome]="albuns.nome"
+            [imagemUrl]="albuns.imagemUrl"
+
+            ></app-card-artista>
+        </div>
+
+
+
+
+
+
+
+    </div>
+</div>
+<app-painel-direito></app-painel-direito>

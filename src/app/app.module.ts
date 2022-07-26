@@ -9,6 +9,7 @@ import { BuscasRecentesComponent } from './pages/components/buscas-recentes/busc
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialDesignModule } from './share/material-design/material-design.module';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,9 +17,11 @@ import { MaterialDesignModule } from './share/material-design/material-design.mo
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     MaterialDesignModule,
     BrowserAnimationsModule,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [AuthInterceptorProvider],
 })
 export class AppModule { }
