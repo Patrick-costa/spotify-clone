@@ -3,6 +3,7 @@ export interface Album{
     imagemUrl: string,
     nome: string,
     data?: string,
+    uri: string,
     artista?: {
         id: string,
         nome: string

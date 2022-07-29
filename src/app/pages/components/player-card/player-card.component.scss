@@ -1,48 +1,91 @@
-.container{
+.container {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    .image{
+    .image {
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
         height: 239px;
         background-position: top;
         background-repeat: no-repeat;
-        background-size: 100%;
+        background-size: cover;
         opacity: 0.85;
     }
 
-    .controles{
+    .controles {
         padding: 10px;
-        background-color: #37AB00;
+        background-color: #37ab00;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
         flex-grow: 1;
         color: #fff;
         min-height: 90px;
 
-        .titulo-musica{
-            width: 100%;   
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            span{
-                font-size: .9rem;
+        .titulo-musica {
+            width: 100%;
+            text-align: center;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            span {
+                font-size: 0.9rem;
                 font-weight: 700;
                 text-align: center;
             }
         }
 
-        .botoes{
+        .botoes {
             width: 100%;
             display: flex;
             margin-top: 10px;
             justify-content: space-evenly;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             align-items: center;
-            *{
+            * {
                 cursor: pointer;
             }
+        }
+
+        .volume {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: .5vh;
+            fa-icon {
+                margin-right: 5px;
+                text-align: end;
+            }
+            input[type="range"] {
+                width: 50%;
+            }
+
+            input[type="range"] {
+                -webkit-appearance: none;
+         
+                width: 50%;
+                height: 5px;
+                background: rgba(255, 255, 255, 0.6);
+                border-radius: 5px;
+                background-color: #fff;
+                background-size: 70% 100%;
+                background-repeat: no-repeat;
+              }
+
+              input[type="range"]:focus{
+                outline: none;
+              }
+              
+              input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                height: 13px;
+                width: 13px;
+                border-radius: 50%;
+                background: #fff;
+                cursor: ew-resize;
+                box-shadow: 0 0 2px 0 #555;
+              }
+              
         }
     }
 }

@@ -24,7 +24,7 @@ export class ListaMusicasArtistaComponent implements OnInit, OnDestroy {
 
   idArtista: string;
   idAlbum: string;
-
+  rota: any;
   musicas: Musica[] = [];
   musicaAtual: Musica = newMusica();
   albuns: Album[] = [];
@@ -42,6 +42,7 @@ export class ListaMusicasArtistaComponent implements OnInit, OnDestroy {
     this.idAlbum = this.activatedRoute.snapshot.params['idPlaylist'];
     this.obterMusicasArtista();
     this.obterMusicaAtual();
+    this.rota = this.activatedRoute.component.name
   }
 
   ngOnDestroy(): void {
@@ -84,10 +85,15 @@ export class ListaMusicasArtistaComponent implements OnInit, OnDestroy {
     return musica.artistas.map(artistas => artistas.nome).join(', ');
   }
 
+  executarPlaylist(uri: string){
+    this.spotifyService.executarPlaylist(uri)  
+  }
+
   irParaAlbum(idAlbum: string) {
     this.router.navigate(['player/artista-playlist/' + this.idArtista + '/' + idAlbum]);
     window.location.reload();
   }
+  
 
   voltar(){
     this.router.navigateByUrl('/player/artistas')

@@ -1,4 +1,4 @@
-<div class="container card p-10">
+<div class="container card p-10 mt-2">
    <div class="image" style="background-image: url('{{musica.album.imagemUrl}}')"></div>
 
     <div class="controles">
@@ -10,6 +10,10 @@
             <fa-icon [icon]="pauseIcone" (click)="pausarMusica()" *ngIf="musica.tocando === true"></fa-icon>
             <fa-icon [icon]="playIcone" (click)="playMusica()" *ngIf="musica.tocando === false"></fa-icon>
             <fa-icon [icon]="proximoIcone" (click)="proximaMusica()"></fa-icon>
+        </div>
+        <div class="volume mt-1">
+            <fa-icon [icon]="volumeIcone"></fa-icon>
+            <input type="range" (input)="controlarVolume($event)" value="100">
         </div>
     </div>
 </div>

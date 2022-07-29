@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SpotifyService } from 'src/app/services/spotify.service';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-card-artista',
@@ -15,7 +16,7 @@ export class CardArtistaComponent implements OnInit {
   @Input()
   imagemUrl = '';
 
-  
+  iconePlay = faPlay;
   @Output()
   click = new EventEmitter<void>();
   constructor(

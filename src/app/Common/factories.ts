@@ -1,3 +1,4 @@
+import { Album } from "../models/albums";
 import { Artista } from "../models/artistas";
 import { Musica } from "../models/musica";
 import { Playlist } from "../models/playlist";
@@ -5,7 +6,7 @@ import { Playlist } from "../models/playlist";
 export function newArtista(): Artista{
     return {
         id: '',
-        imagemUrl: '',
+        imagemUrl: '../../assets/images/no_image.png',
         nome: '',
         musicas: [],
     }
@@ -16,7 +17,7 @@ export function newMusica(): Musica{
         id: '',
         album: {
             id: '',
-            imagemUrl: '',
+            imagemUrl: '../../assets/images/no_image.png',
             nome: '',
         },
         artistas: [],
@@ -26,10 +27,25 @@ export function newMusica(): Musica{
     }
 }
 
+export function newAlbum(): Album{
+    return {
+        id: '',
+        imagemUrl: '../../assets/images/no_image.png',
+        nome: '',
+        artista: {
+            id: '',
+            nome: ''
+        },
+        uri: '',
+        data: '',
+    }
+}
+
+
 export function newPlaylist(): Playlist{
     return{
         id: '',
-        imagemUrl: '',
+        imagemUrl: '../../assets/images/no_image.png',
         nome: '',
         musicas: [],
     }

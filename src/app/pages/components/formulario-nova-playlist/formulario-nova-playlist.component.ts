@@ -34,8 +34,6 @@ export class FormularioNovaPlaylistComponent implements OnInit {
 
     this.http.post(`https://api.spotify.com/v1/users/${this.idUsuario}/playlists`, this.novaPlaylist).subscribe({
       next: (resposta) => {
-
-        console.log(resposta);
         this.matDialog.closeAll();
         this.alertaSwal();
       },
@@ -47,6 +45,7 @@ export class FormularioNovaPlaylistComponent implements OnInit {
 
 
   }
+
 
   alertaSwal() {
     swal.fire({

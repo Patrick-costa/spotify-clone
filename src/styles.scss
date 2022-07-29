@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto+Slab:wght@900&display=swap");
 @import "variaveis.scss";
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
 
 html,
 body {
@@ -29,7 +32,7 @@ body {
     font-weight: bold;
     display: flex;
     align-items: center;
-
+    line-height: 3rem;
     .icone-voltar {
         margin-right: 2rem;
         cursor: pointer;
@@ -106,7 +109,9 @@ body {
 .lista {
     padding: 0px 50px;
     padding-bottom: 20px;
-    width: 80%;
+    
+    width: 68%;
+
     max-height: 100vh;
     overflow-y: scroll;
 }
@@ -185,3 +190,11 @@ td {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.swiper-button-prev{
+    opacity: 0;
+}
+
+.swiper-button-next{
+    opacity: 0;
+}

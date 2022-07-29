@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { newMusica } from 'src/app/Common/factories';
@@ -15,6 +16,8 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
+  rota: any;
+
   musicas: Musica[] = [];
   musicaAtual: Musica = newMusica();
   novaPlaylist: NovaPlaylist;
@@ -25,13 +28,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private spotifyService: SpotifyService,
     private playerService: PlayerService,
-    private http: HttpClient
+    private http: HttpClient,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.obterMusicas();
     this.obterMusicaAtual();
-
+    this.rota = this.activatedRoute.component.name
   }
 
   ngOnDestroy(): void {

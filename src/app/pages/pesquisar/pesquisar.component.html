@@ -1,3 +1,4 @@
+<app-painel-esquerdo [menuSelecionado]="rota"></app-painel-esquerdo>
 <div class="lista">
     <input type="text" placeholder="Artistas ou Musica" (input)="buscar($event)" [(ngModel)]="campoPesquisa"
         class="mt-4">
@@ -14,6 +15,9 @@
 
         <div class="container-resultado mt-2 flex">
             <div class="melhor-resultado" (click)="executarMusica(melhorResultado)">
+                <div class="botaoPlay">
+                    <fa-icon [icon]="iconePlay"></fa-icon>
+                </div>
                 <div class="imagem">
                     <img [src]="melhorResultado.album.imagemUrl">
                 </div>
@@ -28,10 +32,10 @@
             <div class="musicas">
                 <table class="table">
                     <tbody>
-                        <tr *ngFor="let musica of musicas" 
-                        (click)="executarMusica(musica)">
+                        <tr *ngFor="let musica of musicas" (click)="executarMusica(musica)">
                             <td style="width: 50px;"><img class="imagem-musicas" [src]="musica.album.imagemUrl"></td>
-                            <td class="w-60"><span class='titulo'>{{ musica.titulo }}</span>{{definirArtistas(musica)}}</td>
+                            <td class="w-60"><span class='titulo'>{{ musica.titulo }}</span>{{definirArtistas(musica)}}
+                            </td>
                             <td class="direita w-10">{{ musica.tempo }}</td>
                         </tr>
                     </tbody>
@@ -43,13 +47,14 @@
             Artista
         </div>
 
-        <div class="listaArtista mt-1">
-            <app-card-artista (click)="acessarArtista(artista.id)"
-            *ngFor="let artista of artistas"
-            [nome]="artista.nome"
-            [imagemUrl]="artista.imagemUrl"
 
-            ></app-card-artista>
+        <div class="listaArtista mt-1">
+            <swiper [config]="swiperConfig">
+                <ng-template swiperSlide *ngFor="let artista of artistas">
+                    <app-card-artista (click)="acessarArtista(artista.id)" [nome]="artista.nome"
+                        [imagemUrl]="artista.imagemUrl"></app-card-artista>
+                </ng-template>
+            </swiper>
         </div>
 
         <div class="titulo-md mt-6">
@@ -57,19 +62,27 @@
         </div>
 
         <div class="listaArtista">
-            <app-card-artista (click)="irParaAlbum(albuns.id)"
-            *ngFor="let albuns of album"
-            [nome]="albuns.nome"
-            [imagemUrl]="albuns.imagemUrl"
-
-            ></app-card-artista>
+            <swiper [config]="swiperConfig">
+                <ng-template swiperSlide *ngFor="let albuns of album">
+                    <app-card-artista (click)="irParaAlbum(albuns.id)" [nome]="albuns.nome" (click)="executarPlaylist(albuns.uri)"
+                        [imagemUrl]="albuns.imagemUrl"></app-card-artista>
+                </ng-template>
+            </swiper>
         </div>
 
+        <div class="titulo-md mt-6">
+            Playlists
+        </div>
 
-
-
-
-
+        <div class="listaArtista">
+            <swiper [config]="swiperConfig">
+                <ng-template swiperSlide *ngFor="let playlist of playlists">
+                    <app-card-artista (click)="irParaPlaylist(playlist.id)" [nome]="playlist.nome" (click)="executarPlaylist(playlist.uri)"
+                        [imagemUrl]="playlist.imagemUrl"></app-card-artista>
+                </ng-template>
+            </swiper>
+        </div>
+        <br><br>
 
     </div>
 </div>

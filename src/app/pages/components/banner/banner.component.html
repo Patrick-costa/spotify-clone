@@ -1,11 +1,15 @@
-<div class="card p-20">
+<div class="card p-10 mt-1">
+
+    <div class="image">
+        <img [src]="imagemUrl">
+    </div>
+
     <div class="artista flex">
+        <span>Playlist Pública</span>
         <span class="titulo-bg">
             {{text}}
         </span>
-    </div>
 
-    <div class="image" style="background-image: url('{{imagemUrl}}')">
-
+        <span class="descricao" >{{descricao}}</span>
     </div>
 </div>

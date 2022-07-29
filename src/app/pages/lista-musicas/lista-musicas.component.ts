@@ -4,6 +4,7 @@ import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { newMusica } from 'src/app/Common/factories';
 import { Musica } from 'src/app/models/musica';
+import { Playlist } from 'src/app/models/playlist';
 import { PlayerService } from 'src/app/services/player-service.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
@@ -20,13 +21,18 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
    private playerService: PlayerService,
   ) { }
 
+  rota: any;
+
   musicas: Musica[] = []
+  playlists: Playlist[] = [];
   musicaAtual: Musica = newMusica();
   idPlaylist: string;
   playIcone = faPlay;
 
   bannerImagemUrl = '';
   bannerTexto = '';
+  descricao = '';
+  uri = '';
 
   titulo: string = '';
   
@@ -36,6 +42,7 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
     this.obterMusicas();
     this.obterMusicaAtual();
     this.idPlaylist = this.activatedRoute.snapshot.params['id'];
+    this.buscarPlaylistsUsuario();
   }
 
   ngOnDestroy(): void {
@@ -48,6 +55,11 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
     });
 
     this.subs.push(sub);
+  }
+
+  async buscarPlaylistsUsuario(){
+    const lista = await this.spotifyService.buscarPlaylistUsuario();
+    this.playlists = lista;
   }
 
   obterMusicas(){
@@ -70,19 +82,24 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
 
   async obterDadosPlaylist(playlistId: string){
     const playlistMusicas = await this.spotifyService.buscarMusicasPlaylist(playlistId);
-    this.definirDadosPagina(playlistMusicas.nome, playlistMusicas.imagemUrl, playlistMusicas.musicas);
+    console.log(playlistMusicas);
+    this.definirDadosPagina(playlistMusicas.nome, playlistMusicas.imagemUrl, playlistMusicas.musicas, playlistMusicas.descricao, playlistMusicas.uri);
     this.titulo = 'Musicas Playlist: '+playlistMusicas.nome
   
   }
+
+
 
   async obterDadosArtista(artistaId: string){
 
   }
 
-  definirDadosPagina(bannerText: string, bannerImage: string, musicas: Musica[]){
+  definirDadosPagina(bannerText: string, bannerImage: string, musicas: Musica[], descricao: string, uri: string){
     this.bannerImagemUrl = bannerImage;
     this.bannerTexto = bannerText;
     this.musicas = musicas;
+    this.uri = uri;
+    this.descricao = descricao;
   }
 
   obterArtistas(musica: Musica){
@@ -93,5 +110,10 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
     await this.spotifyService.executarMusica(musica.id);
     this.playerService.definirMusicaAtual(musica);
   }
+
+  async seguirPlaylist(){
+    await this.spotifyService.addPlaylist(this.idPlaylist);
+  }
+
 
 }

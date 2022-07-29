@@ -1,8 +1,22 @@
-<div class="lista mt-4">
-    <app-banner [imagemUrl]="bannerImagemUrl" [text]="bannerTexto"></app-banner>
+<app-painel-esquerdo [menuSelecionado]="rota"></app-painel-esquerdo>
+<div class="lista">
+    <div class="banner">
+        <app-banner [imagemUrl]="bannerImagemUrl" [text]="bannerTexto" [descricao]="descricao"></app-banner>
+    </div>
 
-    <div class="titulo-bg mt-7">
-        {{ titulo }}
+    <div class="container-titulo flex">
+        <div class="titulo-bg mt-4">
+            Musicas Playlist
+        </div>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" style="color: #0000004d">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" (click)="seguirPlaylist()">
+            <button mat-menu-item>
+              <mat-icon>bookmark</mat-icon>
+              <span>Seguir playlist</span>
+            </button>
+          </mat-menu>
     </div>
 
     <table class="table mt-3">

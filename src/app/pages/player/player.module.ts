@@ -26,6 +26,7 @@ import { MaterialDesignModule } from '../../share/material-design/material-desig
 import { FormularioNovaPlaylistComponent } from '../components/formulario-nova-playlist/formulario-nova-playlist.component';
 import { PesquisarComponent } from '../pesquisar/pesquisar.component';
 import { ListaMusicasAlbumComponent } from '../lista-musicas-album/lista-musicas-album.component';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ListaMusicasAlbumComponent } from '../lista-musicas-album/lista-musicas
     MaterialDesignModule,
     FontAwesomeModule,
     FormsModule,
+    SwiperModule,
     RouterModule.forChild(PlayerRotas),
   ],
   providers: [AuthInterceptorProvider],

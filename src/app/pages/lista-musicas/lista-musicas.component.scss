@@ -1,4 +1,13 @@
 :host{
     display: flex;
     justify-content: space-between;
+
+    .container-titulo{
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    .menu{
+        z-index: 5;
+    }
 }

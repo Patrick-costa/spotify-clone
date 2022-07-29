@@ -94,6 +94,14 @@ export class SpotifyService {
     this.spotifyApi.skipToNext();
   }
 
+  async executarPlaylist(playlistId: string){
+    await this.spotifyApi.play({context_uri: playlistId});
+  }
+
+  async addPlaylist(playlistId: string){
+    await this.spotifyApi.followPlaylist(playlistId);
+  }
+
   async obterMusicaAtual(): Promise<Musica> {
     const musicaSpotify = await this.spotifyApi.getMyCurrentPlayingTrack();
     const pausado = musicaSpotify.is_playing;
@@ -150,7 +158,7 @@ export class SpotifyService {
       id: album.id,
       imagemUrl: album.images.shift().url,
       nome: album.name,
-  
+      uri: album.uri
     }
     return this.album;
   }
@@ -160,14 +168,15 @@ export class SpotifyService {
     if (!playlistSpotify) {
       return null;
     }
-
     const playlist = SpotifySinglePlaylistParaPlaylist(playlistSpotify);
     const tocando = true;
     const musicasSpotify = await this.spotifyApi.getPlaylistTracks(playlistId, { offset, limit })
     playlist.musicas = musicasSpotify.items.map(musica => SpotifyTrackParaMusica(musica.track as SpotifyApi.TrackObjectFull, tocando))
-    console.log(playlist);
+  
     return playlist;
   }
+
+ 
 
   // buscarMusicasPesquisa(item: string, tipo = 'track'){
   //   return this.http.get(`https://api.spotify.com/v1/search?q=${item}&type=${tipo}&include_external=audio`);
@@ -179,17 +188,20 @@ export class SpotifyService {
   }
 
   buscarAlbunsPesquisa(item: string, tipo = 'album'){
-    return this.http.get(`https://api.spotify.com/v1/search?q=${item}&type=${tipo}&include_external=audio&limit=6`);
+    return this.http.get(`https://api.spotify.com/v1/search?q=${item}&type=${tipo}&include_external=audio&limit=10`);
   }
 
   buscarArtistasPesquisa(item: string, tipo = 'artist'){
-    return this.http.get(`https://api.spotify.com/v1/search?q=${item}&type=${tipo}&include_external=audio&limit=6`);
+    return this.http.get(`https://api.spotify.com/v1/search?q=${item}&type=${tipo}&include_external=audio&limit=10`);
   }
 
   buscarPlaylistPesquisa(item: string, tipo = 'playlist'){
-    return this.http.get(`https://api.spotify.com/v1/search?q=${item}&type=${tipo}&include_external=audio&limit=6`);
+    return this.http.get(`https://api.spotify.com/v1/search?q=${item}&type=${tipo}&include_external=audio&limit=10`);
   }
-  
+
+  controlarVolume(volume: number){
+    this.spotifyApi.setVolume(volume);
+  }
 
   logout() {
     localStorage.clear;

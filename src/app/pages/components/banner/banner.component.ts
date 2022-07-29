@@ -12,6 +12,9 @@ export class BannerComponent implements OnInit {
 
   @Input()
   text = '';
+
+  @Input()
+  descricao = '';
   constructor() { }
 
   ngOnInit(): void {

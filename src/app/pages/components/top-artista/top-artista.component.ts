@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { newArtista } from 'src/app/Common/factories';
 import { Artista } from 'src/app/models/artistas';
 import { SpotifyService } from 'src/app/services/spotify.service';
@@ -14,6 +14,9 @@ export class TopArtistaComponent implements OnInit {
 
   topArtista: Artista = newArtista();
 
+  imagemUrl = '';
+
+  text = '';
 
   ngOnInit(): void {
     this.buscarArtista();
@@ -21,10 +24,12 @@ export class TopArtistaComponent implements OnInit {
 
   async buscarArtista(){
     const artistas = await this.spotifyService.buscarTopArtistas(1);
-
+    
     if(!!artistas){
       this.topArtista = artistas.pop();
     }
+    this.imagemUrl = this.topArtista.imagemUrl;
+    this.text = this.topArtista.nome;
   }
 
 }

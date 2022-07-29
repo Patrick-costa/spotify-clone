@@ -6,7 +6,7 @@ import { Playlist } from "../models/playlist";
 import { Usuario } from "../models/usuario";
 import { newMusica, newPlaylist } from "./factories";
 
-export function SpotifyUserParaUsuario(user: SpotifyApi.CurrentUsersProfileResponse): Usuario{
+export function SpotifyUserParaUsuario(user: SpotifyApi.CurrentUsersProfileResponse): Usuario {
     return {
         id: user.id,
         nome: user.display_name,
@@ -14,24 +14,31 @@ export function SpotifyUserParaUsuario(user: SpotifyApi.CurrentUsersProfileRespo
     }
 }
 
-export function SpotifyPlaylistParaPlaylist(playlist: SpotifyApi.PlaylistObjectSimplified): Playlist{
-    let image = '';
-    if(playlist.images.length != 0){
+export function SpotifyPlaylistParaPlaylist(playlist: SpotifyApi.PlaylistObjectSimplified): Playlist {
+    let image = '../../assets/images/no_image.png';
+
+    if (playlist.images.length != 0) {
         image = playlist.images.shift().url;
     }
 
     return {
         id: playlist.id,
         nome: playlist.name,
+        descricao: playlist.description,
         imagemUrl: image,
+        uri: playlist.uri,
+        dono: {
+            id: playlist.owner.id,
+            nome: playlist.owner.display_name
+        },
     }
 }
 
-export function SpotifyArtistaParaArtista(spotifyArtista: SpotifyApi.ArtistObjectFull): Artista{
+export function SpotifyArtistaParaArtista(spotifyArtista: SpotifyApi.ArtistObjectFull): Artista {
 
-    let image = '';
+    let image = '../../assets/images/no_image.png';
 
-    if(spotifyArtista.images.length != 0){
+    if (spotifyArtista.images.length != 0) {
         image = spotifyArtista.images.shift().url;
     }
 
@@ -42,9 +49,15 @@ export function SpotifyArtistaParaArtista(spotifyArtista: SpotifyApi.ArtistObjec
     }
 }
 
-export function SpotifyTrackPesquisaParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull): Musica{
-    if(!spotifyTrack){
+export function SpotifyTrackPesquisaParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull): Musica {
+    if (!spotifyTrack) {
         return newMusica();
+    }
+
+    let image = '../../assets/images/no_image.png';
+
+    if (spotifyTrack.album.images.length != 0) {
+        image = spotifyTrack.album.images.shift().url
     }
 
     const msParaMinutos = (ms: number) => {
@@ -57,7 +70,7 @@ export function SpotifyTrackPesquisaParaMusica(spotifyTrack: SpotifyApi.TrackObj
         titulo: spotifyTrack.name,
         album: {
             id: spotifyTrack.id,
-            imagemUrl: spotifyTrack.album.images.shift().url,
+            imagemUrl: image,
             nome: spotifyTrack.album.name,
         },
         artistas: spotifyTrack.artists.map(artista => ({
@@ -68,10 +81,15 @@ export function SpotifyTrackPesquisaParaMusica(spotifyTrack: SpotifyApi.TrackObj
     }
 }
 
-export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull, status: boolean): Musica{
-    
-    if(!spotifyTrack){
+export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull, status: boolean): Musica {
+
+    if (!spotifyTrack) {
         return newMusica();
+    }
+    let image = '../../assets/images/no_image.png';
+
+    if (spotifyTrack.album.images.length != 0) {
+        image = spotifyTrack.album.images.shift().url
     }
 
     const msParaMinutos = (ms: number) => {
@@ -84,7 +102,7 @@ export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull,
         titulo: spotifyTrack.name,
         album: {
             id: spotifyTrack.id,
-            imagemUrl: spotifyTrack.album.images.shift().url,
+            imagemUrl: image,
             nome: spotifyTrack.album.name,
         },
         artistas: spotifyTrack.artists.map(artista => ({
@@ -96,24 +114,31 @@ export function SpotifyTrackParaMusica(spotifyTrack: SpotifyApi.TrackObjectFull,
     }
 }
 
-export function SpotifyAlbumParaAlbum(album: SpotifyApi.AlbumObjectSimplified): Album{
-    let albumFull: SpotifyApi.AlbumObjectFull;
+export function SpotifyAlbumParaAlbum(album: SpotifyApi.AlbumObjectSimplified): Album {
+
+    let image = '../../assets/images/no_image.png';
+
+    if (album.images.length != 0) {
+        image = album.images.shift().url
+    }
+
     return {
         id: album.id,
-        imagemUrl: album.images.shift().url,
+        imagemUrl: image,
         nome: album.name,
+        uri: album.uri,
     }
 }
 
 
-export function SpotifyMusicaAlbumParaMusicaAlbum(musica: SpotifyApi.TrackObjectSimplified, album: Album): Musica{
+export function SpotifyMusicaAlbumParaMusicaAlbum(musica: SpotifyApi.TrackObjectSimplified, album: Album): Musica {
 
     const msParaMinutos = (ms: number) => {
         const data = addMilliseconds(new Date(0), ms);
         return format(data, 'mm:ss');
     }
 
-    return{
+    return {
         id: musica.uri,
         artistas: musica.artists.map(artista => ({
             id: artista.id,
@@ -125,19 +150,25 @@ export function SpotifyMusicaAlbumParaMusicaAlbum(musica: SpotifyApi.TrackObject
     }
 }
 
-export function SpotifySinglePlaylistParaPlaylist(playlist: SpotifyApi.SinglePlaylistResponse): Playlist{
-    let image = '';
-    if(playlist.images.length != 0){
+export function SpotifySinglePlaylistParaPlaylist(playlist: SpotifyApi.SinglePlaylistResponse): Playlist {
+    let image = '../../assets/images/no_image.png';
+    if (playlist.images.length != 0) {
         image = playlist.images.shift().url;
     }
 
-    if(!playlist){
+    if (!playlist) {
         return newPlaylist();
     }
-    return{
+    return {
         id: playlist.id,
         nome: playlist.name,
+        uri: playlist.uri,
+        descricao: playlist.description,
         imagemUrl: image,
+        dono: {
+            id: playlist.owner.id,
+            nome: playlist.owner.display_name
+        },
         musicas: [],
     }
 }

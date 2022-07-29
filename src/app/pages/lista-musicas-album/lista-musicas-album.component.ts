@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { newMusica } from 'src/app/Common/factories';
+import { newAlbum, newMusica } from 'src/app/Common/factories';
 import { Album } from 'src/app/models/albums';
 import { Musica } from 'src/app/models/musica';
 import { PlayerService } from 'src/app/services/player-service.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
-import { faAngleLeft, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faH, faHeart, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -21,18 +21,22 @@ export class ListaMusicasAlbumComponent implements OnInit, OnDestroy {
               private router: Router) { }
 
   id: string;
-  album: Album;
+  rota: any;
+  album: Album = newAlbum();
   musicas: Musica[] = [];
   musicaAtual: Musica = newMusica();
-  subs: Subscription[] = []
+  subs: Subscription[] = [];
+
    //Icones
    playIcone = faPlay;
    voltarIcone = faAngleLeft;
+   coracaoIcone = faHeart
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params['idAlbum'];
     this.buscarTracksAlbum();
     this.obterMusicaAtual();
+    this.rota = this.activatedRoute.component.name
   }
 
   ngOnDestroy(): void {
@@ -42,7 +46,6 @@ export class ListaMusicasAlbumComponent implements OnInit, OnDestroy {
   async buscarTracksAlbum(){
     const musicas = await this.spotifyService.obterMusicasAlbum(this.id, await this.obterAlbumId());
     this.musicas = musicas;
-    console.log(this.musicas)
   }
 
   obterMusicaAtual() {

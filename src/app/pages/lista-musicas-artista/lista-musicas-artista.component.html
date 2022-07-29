@@ -1,4 +1,4 @@
-
+<app-painel-esquerdo [menuSelecionado]="rota"></app-painel-esquerdo>
 <div class="lista">
 
 
@@ -27,6 +27,7 @@
                 <td>{{ obterArtistas(musica) }}</td>
                 <td class="direita">{{ musica.tempo }}</td>
                 <td>{{ albumNome }}</td>
+    
             </tr>
         </tbody>
     </table>
@@ -40,6 +41,7 @@
         *ngFor="let album of albuns"
         [nome]="album.nome"
         [imagemUrl]="album.imagemUrl"
+        (click)="executarPlaylist(album.uri)"
         ></app-card-artista>
     </div>
 </div>

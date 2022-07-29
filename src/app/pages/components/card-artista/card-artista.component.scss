@@ -1,7 +1,7 @@
 
     .card-artista{
         width: 180px;
-        min-height: 150px;
+        height: 220px;
         background: #fff;
         box-shadow: 0px 0px 15px #0000002d;
         margin-top: 20px;
@@ -9,19 +9,43 @@
         padding: 20px;
         align-items: center;
         cursor: pointer;
-        flex-direction: column;
         color: #00000083;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 10px;
+        position: relative;
 
+        .botaoPlay{
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            color: #fff;
+            background-color: #37AB00;
+            font-size: 1.3rem;
+            position: absolute;
+            right: 20px;
+            bottom: 60px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        &:nth-child(1){
+            margin-left: 10px;
+        }
         &:hover{
-          background-color: #37AB00;
-          color: #fff;
-          box-shadow: 0px 0px 15px #0000002d;
+            .botaoPlay{
+                opacity: 1;
+            }
         }
         .container-imagem{        
             img{
                 width: 130px;
                 height: 130px;
                 border-radius: 50%;
+                text-align: center;
             }
         }
 
@@ -29,6 +53,10 @@
             margin-bottom: 1vh;
             font-size: 0.8rem;
             font-weight: bold;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
             text-overflow: ellipsis;
+            
         }
     }

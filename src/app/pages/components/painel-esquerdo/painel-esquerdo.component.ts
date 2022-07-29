@@ -40,7 +40,6 @@ export class PainelEsquerdoComponent implements OnInit {
     setTimeout(() => {
       this.buscarPlaylist();
     }, 200);
-    console.log(this.activatedRoute.component.name);
   }
 
   openDialog() {

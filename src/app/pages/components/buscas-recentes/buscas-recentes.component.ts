@@ -31,7 +31,6 @@ export class BuscasRecentesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.forEach(sub => sub.unsubscribe);
-    console.log('destruido');
   }
 
   definirPesquisa(pesquisa: string){
@@ -50,7 +49,6 @@ export class BuscasRecentesComponent implements OnInit, OnDestroy {
         let musica = obj.map(x => x.items);
         let array = musica.pop();
         this.musicas = array.map(SpotifyTrackPesquisaParaMusica);
-        console.log(this.musicas);
       },
       error: (e) => {
         console.log(e);
