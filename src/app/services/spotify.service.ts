@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 import { Artista } from '../models/artistas';
 import { Musica } from '../models/musica';
 import { Album } from '../models/albums';
-import { NovaPlaylist } from '../models/novaPlaylist';
 import { HttpClient } from '@angular/common/http';
+import swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -90,8 +90,12 @@ export class SpotifyService {
   }
 
   async executarMusica(musicaId: string) {
-    await this.spotifyApi.queue(musicaId);
-    this.spotifyApi.skipToNext();
+    try{
+      await this.spotifyApi.queue(musicaId);
+      this.spotifyApi.skipToNext();
+    } catch{
+      this.alertaSwal();
+    }
   }
 
   async executarPlaylist(playlistId: string){
@@ -206,5 +210,15 @@ export class SpotifyService {
   logout() {
     localStorage.clear;
     this.router.navigate(['/login'])
+  }
+
+  alertaSwal() {
+    swal.fire({
+      icon: 'error',
+      title: 'Spotify Fechado',
+      text: 'Execute o spotify em algum dispositivo',
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 }
