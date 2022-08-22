@@ -5,6 +5,7 @@
 @import 'swiper/scss/navigation';
 @import 'swiper/scss/pagination';
 
+
 html,
 body {
     margin: 0;
@@ -13,9 +14,11 @@ body {
 }
 
 * {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
-}
+  }
+
+
 
 .flex {
     display: flex;
@@ -33,11 +36,12 @@ body {
     display: flex;
     align-items: center;
     line-height: 3rem;
+
     .icone-voltar {
         margin-right: 2rem;
         cursor: pointer;
     }
-    
+
     &-bg {
         @extend .titulo;
         font-size: 2.2rem;
@@ -53,21 +57,27 @@ body {
     &-1 {
         margin-top: 1vh;
     }
+
     &-2 {
         margin-top: 2vh;
     }
+
     &-3 {
         margin-top: 3vh;
     }
+
     &-4 {
         margin-top: 4vh;
     }
+
     &-5 {
         margin-top: 5vh;
     }
+
     &-6 {
         margin-top: 6vh;
     }
+
     &-7 {
         margin-top: 7vh;
     }
@@ -81,7 +91,7 @@ body {
     padding: 10px;
 }
 
-.mb-1{
+.mb-1 {
     margin-bottom: 1vh;
 }
 
@@ -92,6 +102,7 @@ body {
 
 ::-webkit-scrollbar {
     width: 7px;
+
     &-thumb {
         background-color: #37ab0020;
         border-radius: 12px;
@@ -109,7 +120,7 @@ body {
 .lista {
     padding: 0px 50px;
     padding-bottom: 20px;
-    
+
     width: 68%;
 
     max-height: 100vh;
@@ -172,10 +183,6 @@ td {
     font-weight: 500;
     font-size: 0.85rem;
     color: #00000091;
-
-    &:nth-child(1) {
-        padding-left: 10px;
-    }
 }
 
 .w {
@@ -188,13 +195,11 @@ td {
     }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.swiper-button-prev{
+.swiper-button-prev {
     opacity: 0;
 }
 
-.swiper-button-next{
+.swiper-button-next {
     opacity: 0;
 }

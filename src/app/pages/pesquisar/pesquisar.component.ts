@@ -52,7 +52,7 @@ export class PesquisarComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.subs.forEach(sub => sub.unsubscribe);
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 
   larguraTela = window.innerWidth;
